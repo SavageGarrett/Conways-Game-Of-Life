@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 963194225}
-  simulationSize: 20
-  objectParent: {fileID: 1961338782}
+  simulationSize: 10
+  deadParent: {fileID: 1961338782}
   deadPrefab: {fileID: 7319193052005044191, guid: 2a6274f49e78830fa903ea02bbde010a, type: 3}
   liveParent: {fileID: 1387579894}
   livePrefab: {fileID: 6305358455885626098, guid: ac97fefec782ed93c943c93c327a1f90, type: 3}
@@ -189,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &705507994
 Light:
   m_ObjectHideFlags: 0
