@@ -8,7 +8,7 @@ namespace CarderGarrett.Lab6 {
     {
         [Header("Scene")]
         [SerializeField]
-        GameObject camera;
+        Camera camera;
 
         [SerializeField]
         int simulationSize = 10;
@@ -34,7 +34,6 @@ namespace CarderGarrett.Lab6 {
 
         Grid dataRep;
 
-        // Start is called before the first frame update
         void Start()
         {
             PrimeCells(ref deadCells, deadPrefab, deadParent, 0f);
@@ -45,6 +44,9 @@ namespace CarderGarrett.Lab6 {
             // Place and rotate the camera
             camera.transform.position = new Vector3(simulationSize * 0.5f, simulationSize * 0.5f, simulationSize * 0.5f);
             camera.transform.rotation = Quaternion.Euler(90, 0, 0);
+
+            // Adjust size to fit all squares
+            camera.orthographicSize = ((float) simulationSize) / 2f;
         }
 
         void PrimeCells(ref List<List<GameObject>> cells, GameObject prefab, GameObject parent, float yPos)
