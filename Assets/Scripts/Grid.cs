@@ -16,6 +16,7 @@ namespace CarderGarrett.Lab6 {
             nextState = WipeGrid();
         }
 
+        // Wipe the Grid to be Completely Empty
         List<List<bool>> WipeGrid()
         {
             List<List<bool>> grid = new List<List<bool>>();
@@ -33,27 +34,32 @@ namespace CarderGarrett.Lab6 {
             return grid;
         }
         
+        // Return Current State
         public List<List<bool>> getCurrentState()
         {
             return currentState;
         }
 
+        // Update the State to Conway's Game of Life
         public List<List<bool>> updateState()
         {
+            // Wipe the Grid
             nextState = WipeGrid();
 
+            // Iterate over each cell
             for (int row = 0; row < size; row++)
             {
                 for (int col = 0; col < size; col++)
                 {
+                    // Get the number of neighbors and determine whether the cell lives or dies
                     int liveNeighbors = getNumberOfNeighbors(row, col);
 
                     nextState[row][col] = getNextState(currentState[row][col], liveNeighbors);
                 }
             }
 
+            // Set the state active and return
             currentState = nextState;
-
             return currentState;
         }
 
@@ -83,6 +89,7 @@ namespace CarderGarrett.Lab6 {
                 }
             }
 
+            // Leave in Current State if no State is Determined
             return currentState;
         }
 

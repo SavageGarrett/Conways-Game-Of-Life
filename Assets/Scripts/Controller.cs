@@ -40,16 +40,15 @@ namespace CarderGarrett.Lab6 {
 
         void Start()
         {
-            // Debug.Log("DATA REP");
+            // Load the JSON File
             List<List<bool>> initialRep = initialData.getInitialDataRep();
             simulationSize = initialRep.Count;
-            // Debug.Log(initialRep.Count);
-            // PrintGridDebug(initialRep);
-            // Debug.Log("END DATA REP");
 
+            // Create the procedurally generated objects
             PrimeCells(ref deadCells, deadPrefab, deadParent, 0f);
             PrimeCells(ref liveCells, livePrefab, liveParent, -1.0f);
 
+            // Initialize the Simulation
             dataRep = new Grid(initialRep);
 
             // Place and rotate the camera
@@ -59,6 +58,7 @@ namespace CarderGarrett.Lab6 {
             // Adjust size to fit all squares
             camera.orthographicSize = ((float) simulationSize) / 2f;
 
+            // Show Initial State
             UpdateVisualGrid(dataRep.getCurrentState());
         }
 
@@ -66,11 +66,13 @@ namespace CarderGarrett.Lab6 {
         {
             // Initialize the cell list
             cells = new List<List<GameObject>>();
+
             for (int row = 0; row < simulationSize; row++)
             {
                 List<GameObject> columnList = new List<GameObject>();
                 for (int col = 0; col < simulationSize; col++)
                 {
+                    // Prime Empty Prefabs
                     GameObject cell = Instantiate(prefab, parent.transform);
                     cell.transform.position = new Vector3(row + 0.5f, yPos, col + 0.5f);
                     columnList.Add(cell);
@@ -84,8 +86,10 @@ namespace CarderGarrett.Lab6 {
         {
             timer += Time.deltaTime;
 
+            // Only update the simulation based on the step size
             if (timer >= simulationStep)
             {
+                // Get the next state and show it
                 List<List<bool>> currentSimState = dataRep.updateState();
                 PrintGridDebug(currentSimState);
                 UpdateVisualGrid(currentSimState);
@@ -94,9 +98,7 @@ namespace CarderGarrett.Lab6 {
         }
 
         void UpdateVisualGrid(List<List<bool>> currentSimState) {
-            // Loop through each row of the nested list
             for (int i = 0; i < currentSimState.Count; i++) {
-                // Loop through each element in the current row
                 for (int j = 0; j < currentSimState[i].Count; j++) {
                     // If the current element is true, hide the live cell plane
                     if (currentSimState[i][j]) {
@@ -114,11 +116,11 @@ namespace CarderGarrett.Lab6 {
         void PrintGridDebug(List<List<bool>> currentSimState) {
             // Initialize the StringBuilder to concatenate the row strings
             StringBuilder gridStringBuilder = new StringBuilder();
-            // Loop through each row of the nested list
+
+            // Build a debug grid representation
             for (int i = 0; i < currentSimState.Count; i++) {
-                // Initialize the row StringBuilder to concatenate the element characters
                 StringBuilder rowStringBuilder = new StringBuilder();
-                // Loop through each element in the current row
+
                 for (int j = 0; j < currentSimState[i].Count; j++) {
                     // If the current element is true, add '█' to the row StringBuilder
                     if (currentSimState[i][j]) {
@@ -129,10 +131,11 @@ namespace CarderGarrett.Lab6 {
                         rowStringBuilder.Append("░");
                     }
                 }
-                // Append the current row string to the grid StringBuilder
+
                 gridStringBuilder.AppendLine(rowStringBuilder.ToString());
             }
-            // Log the entire grid string using Debug.Log
+
+            // Log the Grid
             Debug.Log(gridStringBuilder.ToString());
         }
 

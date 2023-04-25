@@ -20,8 +20,10 @@ namespace CarderGarrett.Lab6
         private GridRawData rawData = new GridRawData();
 
         public List<List<bool>> getInitialDataRep() {
+            // Serialize JSON
             rawData = JsonUtility.FromJson<GridRawData>(textJSON.text);
 
+            // Construct JSON to a 2D Array
             List<List<bool>> initialData = new List<List<bool>>();
             for (int i = 0; i < rawData.size; i++) {
                 List<bool> row = new List<bool>();
@@ -32,10 +34,11 @@ namespace CarderGarrett.Lab6
                 initialData.Add(row);
             }
 
-            // Translate the JSON data to Unity's coordinate system
+            // Translate the JSON data to Unity's coordinate system and return
             return RotateClockwise(initialData);
         }
 
+        // Rotate the array clockwise - otherwise simulation will apear different than generated JSON
         public static List<List<bool>> RotateClockwise(List<List<bool>> matrix)
         {
             int numRows = matrix.Count;
