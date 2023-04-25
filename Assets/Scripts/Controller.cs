@@ -9,9 +9,13 @@ namespace CarderGarrett.Lab6 {
         [Header("Scene")]
         [SerializeField]
         Camera camera;
-
         [SerializeField]
-        int simulationSize = 10;
+        float simulationStep = 1f;
+
+        [Header("Data")]
+        [SerializeField]
+        JSONReader initialData;
+        int simulationSize;
 
         [Header("Dead Cells")]
 
@@ -36,10 +40,17 @@ namespace CarderGarrett.Lab6 {
 
         void Start()
         {
+            // Debug.Log("DATA REP");
+            List<List<bool>> initialRep = initialData.getInitialDataRep();
+            simulationSize = initialRep.Count;
+            // Debug.Log(initialRep.Count);
+            // PrintGridDebug(initialRep);
+            // Debug.Log("END DATA REP");
+
             PrimeCells(ref deadCells, deadPrefab, deadParent, 0f);
             PrimeCells(ref liveCells, livePrefab, liveParent, -1.0f);
 
-            dataRep = new Grid(simulationSize);
+            dataRep = new Grid(initialRep);
 
             // Place and rotate the camera
             camera.transform.position = new Vector3(simulationSize * 0.5f, simulationSize * 0.5f, simulationSize * 0.5f);
@@ -47,6 +58,8 @@ namespace CarderGarrett.Lab6 {
 
             // Adjust size to fit all squares
             camera.orthographicSize = ((float) simulationSize) / 2f;
+
+            UpdateVisualGrid(dataRep.getCurrentState());
         }
 
         void PrimeCells(ref List<List<GameObject>> cells, GameObject prefab, GameObject parent, float yPos)
@@ -71,7 +84,7 @@ namespace CarderGarrett.Lab6 {
         {
             timer += Time.deltaTime;
 
-            if (timer >= 1f)
+            if (timer >= simulationStep)
             {
                 List<List<bool>> currentSimState = dataRep.updateState();
                 PrintGridDebug(currentSimState);

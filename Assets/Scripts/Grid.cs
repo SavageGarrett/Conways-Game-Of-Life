@@ -9,22 +9,11 @@ namespace CarderGarrett.Lab6 {
         private List<List<bool>> nextState;
         int size;
 
-        public Grid(int size)
+        public Grid(List<List<bool>> initialState)
         {
-            this.size = size;
-            currentState = WipeGrid();
+            this.size = initialState.Count;
+            currentState = initialState;
             nextState = WipeGrid();
-
-            // Add some still lifes to the current state
-            currentState[1][1] = true;
-            currentState[1][2] = true;
-            currentState[2][1] = true;
-            currentState[2][2] = true;
-
-            // Add some oscillators to the current state
-            currentState[5][5] = true;
-            currentState[5][6] = true;
-            currentState[5][7] = true;
         }
 
         List<List<bool>> WipeGrid()
@@ -42,6 +31,11 @@ namespace CarderGarrett.Lab6 {
             }
 
             return grid;
+        }
+        
+        public List<List<bool>> getCurrentState()
+        {
+            return currentState;
         }
 
         public List<List<bool>> updateState()

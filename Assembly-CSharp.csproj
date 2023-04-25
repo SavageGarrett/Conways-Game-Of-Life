@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets/Scripts/Grid.cs" />
      <Compile Include="Assets/Scripts/Controller.cs" />
+     <Compile Include="Assets/Scripts/JSONReader.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/garrett/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

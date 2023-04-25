@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 34197572}
   - component: {fileID: 34197573}
+  - component: {fileID: 34197574}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -168,11 +169,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 963194227}
-  simulationSize: 20
+  simulationStep: 0.25
+  initialData: {fileID: 34197574}
   deadParent: {fileID: 1961338782}
   deadPrefab: {fileID: 7319193052005044191, guid: 2a6274f49e78830fa903ea02bbde010a, type: 3}
   liveParent: {fileID: 1387579894}
   livePrefab: {fileID: 6305358455885626098, guid: ac97fefec782ed93c943c93c327a1f90, type: 3}
+--- !u!114 &34197574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34197571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381b0547c1416bd669f516c49b358018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textJSON: {fileID: 4900000, guid: 04bd97689948d87e7837525db913a6b5, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
